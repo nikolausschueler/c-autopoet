@@ -10,6 +10,8 @@
 #include <unistd.h>
 #endif
 
+#include <string.h>
+
 // If we have getopt.h, we have getopt_long, else we have only getopt. Depending
 // on the value of the macros the corresponding function is defined here.
 
@@ -78,7 +80,7 @@ void getOptions(int argc,
     case opt_typewriter:
       // This amount of sleeptime results in an output speed like you
       // see it on consoles in science fiction films.
-      sleeptime = 100000;
+      *sleeptime = 100000;
       break;
     case 'h':
     case '?':
