@@ -26,18 +26,7 @@ int main(int argc, char* argv[]) {
 
   wordLen = 3;
 
-  printf("??? HERE\n");
   getOptions(argc, argv, &infileName, &outfileName, &wordLen, &sleeptime); 
-  printf("??? HERE2\n");
-
-  if(infileName)
-    printf("%s\n", infileName);
-
-  if(outfileName)
-    printf("%s\n", outfileName);
-
-  printf("%d\n", wordLen);
-  printf("%d\n", sleeptime);
 
   if(infileName) {
     if((fpin = fopen(infileName, "r")) == NULL) {
