@@ -27,7 +27,10 @@ Poet* Poet_new(char* text, int wordLength)
   int i = 0;
   Poet* poet = calloc(1, sizeof(Poet));
 
-  //?? Do strdup() here?
+  //?? Do strdup() here? Text is not manipulated, so there is no need to
+  // You must free the text passed into here anyway outside of poet, so in
+  // principle you shouldnt care. If Poet doesn't strdup, it simply must
+  // not free in Poet_free. Thats the benefit of Poet being an ADT.
   poet->text = text;
   poet->textlen = strlen(text);
 
@@ -45,20 +48,28 @@ Poet* Poet_new(char* text, int wordLength)
   return poet;
 }
 
-/*??? What to free exactly here? text? word?
 void Poet_free(Poet** poet)
 {
   assert(*poet);
   
-  free
+  Vector_free(&((*poet)->successors));
+  free((*poet)->word);
+  free(*poet);
+  *poet = NULL;
 }
-*/
 
 int Poet_count(Poet* poet)
 {
   assert(poet);
   
   return poet->count;
+}
+
+int Poet_getWordLength(Poet* poet)
+{
+  assert(poet);
+
+  return poet->wordlen;
 }
 
 BOOL Poet_hasNext(Poet* poet)

@@ -2,12 +2,17 @@
 #define POET_H
 
 /**
- * \file An ADT for the Poet-Algorithm. This algorithm was once upon
+ * \file
+ * An ADT for the Poet-Algorithm. This algorithm was once upon
  * a time described in "Computer-Kurzweil" in "Spektrum der Wissenschaft".
  * You can also find this algorithm implemented in emacs, as
  * "dissociated-press".
  */
 
+/**
+ * This is an ADT, that means you cant see the innards of that struct.
+ * (Of course you can look into the sources.)
+ */
 typedef struct Poet_T Poet;
 
 /**
@@ -17,16 +22,23 @@ typedef struct Poet_T Poet;
  */
 Poet* Poet_new(char* text, int wordLength);
 
+/**
+ * Deallocate that Poet, setting the pointer to it to <code>NULL</code>.
+ */
+void Poet_free(Poet** poet);
+
 /** 
  * Return the word-length used by Poet.
  */
-int Poet_getWordlength(Poet* poet);
+int Poet_getWordLength(Poet* poet);
 
 /**
  * Indicates if Poet can proceed or if it has reached the end of the
  * text.
- * @return <code>TRUE</code> if Poet can proceed, 
- * <code>FALSE</code> if end of text has been reached.
+ * @return <ul>
+ *          <li><code>TRUE</code> if Poet can proceed,</li>
+ *          <li><code>FALSE</code> if end of text has been reached.</li>
+ *         </ul>
  */
 BOOL Poet_hasNext(Poet* poet);
 
@@ -48,10 +60,5 @@ char Poet_next(Poet* poet);
  * @todo Document interactions between Poet_next() and Poet_output().
  */
 char* Poet_output(Poet* poet);
-
-/**
- * Set the word-length used by this Poet.
- */
-void Poet_setWordLength(Poet* poet, int wordlen);
 
 #endif // POET_H

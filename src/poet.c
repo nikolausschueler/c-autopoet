@@ -133,7 +133,6 @@ int main(int argc, char **argv)
       printf("\n");
     }
   }
-  
-  //??? Implement: Poet_free(&poet);
+  Poet_free(&poet);
   return 0;
 }			 		

@@ -6,6 +6,10 @@ dnl Checks for programs.
 AC_PROG_MAKE_SET
 AC_PROG_CC
 AM_PROG_LIBTOOL
+AC_CHECK_PROG(doxygen_is_here, doxygen, yes, no)
+if test $doxygen_is_here = no; then
+  AC_MSG_WARN(doxygen was not found so documentation can not be made)
+fi
 
 dnl Checks for libraries.
 dnl Replace `main' with a function in -lNikBaseC:
