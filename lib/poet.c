@@ -10,48 +10,86 @@
 
 #define SAME 0
 
-void poet(FILE* fpin, int wordLen, int sleeptime)
+struct Poet_T 
 {
-  char c;
+  Vector* successors;
   char* word = NULL;
   char* text = NULL;
-  int fileLen = 0;
-  int randNum = 0;
-  int i = 0;
-  Vector* successors;
+  int textlen = 0;
+};
 
-  successors = Vector_new();
+Poet* Poet_new(char* text)
+{
+  Poet* poet = calloc(1, sizeof(Poet));
+
+  //?? Do strdup() here?
+  poet->text = text;
+  poet->textlen = strlen(text);
 
   word = (char*) calloc(wordLen, sizeof(char));
-  fileLen = getlen(fpin);
-  text = toBuf(fpin);
 
   /*:-O Set the start word. */ 
   for(i = 0; i < wordLen; i++) {
     word[i] = text[i];
     putchar(word[i]);
   }
+
+  poet->word = word;
+  poet->successors = Vector_new();
   
-  while(1) {
-    Vector_clear(successors);
 
-    for(i = 0; i < fileLen - wordLen; i++) {
-      if(strncmp(text + i, word, wordLen) == SAME) {
-	Vector_add(successors, text + i + wordLen);
-      }
-    }
-    randNum = (int) (Vector_size(successors) * (double) random()/ RAND_MAX);
-    c = *((char*) (Vector_elem(successors, randNum)));
+}
 
-    /*:-O If end of text is reached, stop. */
-    if(c == EOF) {
-      printf("\n\n");
-      exit(0);
+BOOL Poet_hasNext(Poet* poet)
+{
+  assert(poet);
+  
+  return poet->hasNext();
+}
+
+char Poet_next(Poet* poet)
+{
+  char c;
+  int randNum = 0;
+  int i = 0;
+
+  assert(poet);
+  assert(poet->hasNext == TRUE);
+
+  Vector_clear(poet->successors);
+  
+  for(i = 0; i < poet->textlen - poet->wordLen; i++) {
+    if(strncmp(poet->text + i, poet->word, poet->wordLen) == SAME) {
+      Vector_add(poet->successors, poet->text + i + poet->wordLen);
     }
-    //??printf("sleeptime: %d\n", sleeptime);
-    usleep(sleeptime);
-    putchar(c);
-    fflush(stdout);
-    shiftstr(word, c);
   }
+  randNum = (int) (Vector_size(poet->successors) * (double) random()/ RAND_MAX);
+  c = *((char*) (Vector_elem(poet->successors, randNum)));
+  
+  /*:-O If end of text is reached, stop. */
+  if(c == '\0') {
+    poet->hasNext = FALSE;
+  }
+  shiftstr(poet->word, c);
+  
+  /*:-O 
+   * If poet has reached the end of text, return end-of-string. 
+   */
+  return c;
 }			 		
+
+
+char* Poet_output(Poet* poet)
+{
+  char c;
+  String* s = NULL;
+
+  assert(poet);
+
+  String* s = String_new();
+  while(Poet_hasNext(poet))
+    c = Poet_next(poet);
+    String_append(s, c);
+  }
+  return String_toChars(s);
+}
