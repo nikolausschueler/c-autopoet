@@ -1,4 +1,4 @@
-INCLUDES = -I$(top_builddir)/lib
+INCLUDES = -I$(top_srcdir)/lib
 
 bin_PROGRAMS = poet
 poet_SOURCES = poet.c

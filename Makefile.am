@@ -1,5 +1,11 @@
 SUBDIRS = lib app
 
+dist-hook:
+	echo "DISTHOOK WAS CALLED"
+
+install-hook:
+	echo "INSTALLHOOK WAS CALLED"
+
 doc:
 	doxygen
 
