@@ -81,9 +81,26 @@ int main(int argc, char **argv)
     case 'h':
     case '?':
     case opt_help:
-      //??? This is not the complete usage. How to put out usage? Write 
-      // some framework as i did for Java?
-      printf("usage: %s < filename -w wordLength -s [random seed]\n", argv[0]);
+      printf("usage: %s [options] < filename\n", argv[0]);
+      printf("where options are as follows:\n");
+      printf("-f --file filename\n");
+      printf("\tName of input file. Without this option, input is read from stdin.\n");
+      printf("-h -? --help\n");
+      printf("\tDisplay help for this program and exit.\n");
+      printf("-o --output filename\n");
+      printf("\tName of output file. Without this option, output is written to stdout.\n");
+      printf("-s --seed random seed\n");
+      printf("\tA seed for the random number generator.\n");
+      printf("\tDifferent seeds result in different output.\n");
+      printf("--sleep sleep time\n");
+      printf("\tTime to sleep before next letter is displayed.\n");
+      printf("\tValues for this may be different for every OS, you have to try it.\n");
+      printf("-t --typewriter\n");
+      printf("\tA preset for sleep time as specified for sleep.\n");
+      printf("\tThis sets an output speed like on those beeping terminals\n");
+      printf("\tyou see in older science fiction films.\n");
+      printf("-w --wordlen wordLength\n");
+      printf("\tThe word length to be used.\n");
       exit(1);
       // This can never reached, but we learned in school to end a case 
       // with "break".
