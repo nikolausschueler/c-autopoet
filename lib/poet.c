@@ -7,11 +7,10 @@
 #include <string.h>
 
 #include <nik/base.h>
-//#include <misc_c.h>
 
 #define SAME 0
 
-void poet(FILE* fpin, int wordLen)
+void poet(FILE* fpin, int wordLen, int sleeptime)
 {
   char c;
   char* word = NULL;
@@ -27,7 +26,7 @@ void poet(FILE* fpin, int wordLen)
   fileLen = getlen(fpin);
   text = toBuf(fpin);
 
-  /* Startwort setzen. */ 
+  /*:-O Set the start word. */ 
   for(i = 0; i < wordLen; i++) {
     word[i] = text[i];
     putchar(word[i]);
@@ -44,18 +43,13 @@ void poet(FILE* fpin, int wordLen)
     randNum = (int) (Vector_size(successors) * (double) random()/ RAND_MAX);
     c = *((char*) (Vector_elem(successors, randNum)));
 
-    /* Fuer logging:
-    for(i = 0; i < successors->size; i++) {
-      printf("%c", *((char*) successors->elems[i]));
-    }
-    printf("\n");
-    */
-
-    /* Wenn der Text zuende ist, aussteigen. */
+    /*:-O If end of text is reached, stop. */
     if(c == EOF) {
       printf("\n\n");
       exit(0);
     }
+    //??printf("sleeptime: %d\n", sleeptime);
+    usleep(sleeptime);
     putchar(c);
     fflush(stdout);
     shiftstr(word, c);

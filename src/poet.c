@@ -2,6 +2,7 @@
  * jedoch mit denen eines echten nicht zu vergleichen.
  */
 
+#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,27 +14,97 @@
 
 int main(int argc, char **argv)
 {
+  int c = 0;
+  int optionIndex = 0;
+  int sleeptime = 0;
   int wordLen = 0;
-  FILE *fpin;
-  
-  if(argc < 3) {
-    printf("usage: %s <filename> <wordLength> [random seed]\n", argv[0]);
-    exit(1);
-  }
-  if((fpin = fopen(argv[1], "r")) == NULL) {
-    printf("%s: Cannot open input file  %s .\n", argv[0], argv[1]);
-    exit(1);
-  }
-  wordLen = atoi(argv[2]); /* Falsch. Nur fuer Debugger-Test. */
+  char* infileName = NULL;
+  char* outfileName = NULL;
+  FILE *fpin = NULL;
 
-  // Optionales Argument
-  if(argc > 3) {
-    srandom(atoi(argv[3]));
+  /*
+   * Use numbers > 256 here, so they dont get confused with the 
+   * acsii character codes getopt() returns for the single letter
+   * options.
+   */
+  enum { 
+    opt_infile = 300,
+    opt_outfile = 301,
+    opt_wordlen = 302,
+    opt_seed = 303,
+    opt_help = 304,
+    opt_sleep = 305,
+    opt_typewriter = 306
+  };
+  
+  static struct option long_options[] = {
+    {"file", required_argument, 0, opt_infile},
+    {"output", required_argument, 0, opt_outfile},
+    {"wordlen", required_argument, 0, opt_wordlen},
+    {"seed", required_argument, 0, opt_seed},
+    {"help", no_argument, 0, opt_help},
+    {"sleep", required_argument, 0, opt_sleep},
+    {"typewriter", no_argument, 0, opt_typewriter},
+    {0, 0, 0, 0}
+  };
+
+  wordLen = 3;
+
+  while((c = getopt_long(argc, argv, "h?f:o:s:tw:", long_options, &optionIndex)) != -1) {
+    switch(c) {
+    case 'f':
+    case opt_infile:
+      infileName = strdup(optarg);
+      break;
+    case 'o':
+    case opt_outfile:
+      outfileName = strdup(optarg);
+      break;
+    case 'w':
+    case opt_wordlen:
+      wordLen = atoi(optarg);
+      break;
+    case 's':
+    case opt_seed:
+      srandom(atoi(optarg));
+      break;
+    case opt_sleep:
+      sleeptime = atoi(optarg);
+      break;
+    case 't':
+    case opt_typewriter:
+      // This amount of sleeptime results in an output speed like you
+      // see it on consoles in science fiction films.
+      sleeptime = 100000;
+      break;
+    case 'h':
+    case '?':
+    case opt_help:
+      //??? This is not the complete usage. How to put out usage? Write 
+      // some framework as i did for Java?
+      printf("usage: %s < filename -w wordLength -s [random seed]\n", argv[0]);
+      exit(1);
+      // This can never reached, but we learned in school to end a case 
+      // with "break".
+      break;
+    default:
+      break;
+    }
+  } 
+  
+  if(infileName) {
+    if((fpin = fopen(infileName, "r")) == NULL) {
+      fprintf(stderr, "Cannot open input file\n");
+      exit(1);
+    }
   }
+  else fpin = stdin;
 
   //?? For starters, let function print directly to screen. Later, return
   // complete string or return a char with every call.
-  poet(fpin, wordLen);
+  //??? outfile is not considered in the moment, because poet() writes
+  // directly to screen.
+  poet(fpin, wordLen, sleeptime);
 
   return 0;
 }			 		
