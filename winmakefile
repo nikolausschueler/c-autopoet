@@ -1,0 +1,19 @@
+CC = cc
+
+CFLAGS = -Wall -g -I../include -I../misc
+PROGS = poet
+
+poet: poet.o
+	$(CC) $(CFLAGS) -o $@ poet.o -lNikBaseC
+
+poet-static: static-lib poet.o
+	$(CC) $(CFLAGS) -o $@ poet.o ../misc/libNikBaseC.a
+
+static-lib:
+	cd ../misc; make static-lib
+
+clean:
+	rm -rf $(DELETABLES)
+
+proper: clean
+	rm $(PROGS)
