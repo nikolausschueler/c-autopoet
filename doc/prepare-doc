@@ -1,3 +1,8 @@
 #!/bin/sh
 
-db2html --mangle "http://www.drnik.org/c/poet->.." --toplevel article ../../../text/prog_doc/m_c_poet.xml
+special_file=`pwd`/../../../text/util/special.xml
+topic_file=`pwd`/../../../text/util/topic.xml
+
+db2html --mangle "http://www.drnik.org/c/poet->.." \
+  --toplevel article ../../../text/prog_doc/m_c_base.xml \
+  --special ${special_file} --topic ${topic_file}
