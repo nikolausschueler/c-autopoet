@@ -1,8 +1,0 @@
-<!--??? Should this be "chapter"? I think "chapter" is not allowed in an 
-  article and so it should be "sect1". But "sect1" doesn't work with my
-  stylesheet. Rethink this.
--->
-<chapter status="fake" link="../apidoc/html/index.html">
-<title>Api-Doc</title>
-<subtitle>Documentation for Poet's API</subtitle>
-</chapter>
