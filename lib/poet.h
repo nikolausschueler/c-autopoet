@@ -1,6 +1,8 @@
 #ifndef POET_H
 #define POET_H
 
+#include <nik/base.h>
+
 /**
  * @file
  * An ADT for the Poet-Algorithm. This algorithm was once upon

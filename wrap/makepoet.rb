@@ -1,9 +1,7 @@
 # This script builds and installs my C poet stuff as a ruby module. It uses
 # swig (http://www.swig.org).
 
-headerpath = "/usr/local/include"
-nikheaderdir = "nik"
-headerdir = "#{headerpath}/#{nikheaderdir}"
+headerdir = "../lib"
 
 # Check if one of my basic headers is there
 if(!File.exists?("#{headerdir}/poet.h"))
@@ -19,9 +17,7 @@ if(!File.exists?("#{headerdir}/poet.h"))
   exit
 end
 
-headers = [
-  "nikdefs.h",
-  "poet.h"]
+headers = ["poet.h"]
 
 print "Writing swig file\n"
 
