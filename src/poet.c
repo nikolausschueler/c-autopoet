@@ -8,7 +8,9 @@
 #include <string.h>
 
 #include <nik/base.h>
-//#include <misc_c.h>
+
+//??? Hotfix. It should not be necessary to use an explicit path here.
+#include "../lib/poet.h"
 
 #define SAME 0
 
@@ -20,6 +22,7 @@ int main(int argc, char **argv)
   int wordLen = 0;
   char* infileName = NULL;
   char* outfileName = NULL;
+  char* text = NULL;
   FILE *fpin = NULL;
 
   /*
@@ -100,11 +103,12 @@ int main(int argc, char **argv)
   }
   else fpin = stdin;
 
-  //?? For starters, let function print directly to screen. Later, return
-  // complete string or return a char with every call.
+  text = toBuf(fpin);
+  Poet* poet = Poet_new(text, wordLen);
+  printf("%s", Poet_output(poet));
   //??? outfile is not considered in the moment, because poet() writes
   // directly to screen.
-  poet(fpin, wordLen, sleeptime);
-
+  
+  //??? Implement: Poet_free(&poet);
   return 0;
 }			 		

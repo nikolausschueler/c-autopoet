@@ -8,13 +8,14 @@
  * "dissociated-press".
  */
 
-typedef Poet_T Poet;
+typedef struct Poet_T Poet;
 
 /**
- * Make a new Poet, initialized with <code>text</code>. 
+ * Make a new Poet, initialized with <code>text</code>,
+ * and the required word-length.
  * <code>text</code> must be a NULL-terminated string.
  */
-Poet* Poet_new(char* text);
+Poet* Poet_new(char* text, int wordLength);
 
 /** 
  * Return the word-length used by Poet.
