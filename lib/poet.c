@@ -25,7 +25,13 @@ static char next(Poet* poet);
 Poet* Poet_new(char* text, int wordLength)
 {
   int i = 0;
-  Poet* poet = calloc(1, sizeof(Poet));
+  Poet* poet = NULL;
+  
+  if(strlen(text) < wordLength) {
+    wrongo("Text to short for given word length", TRUE);
+  }
+
+  poet = calloc(1, sizeof(Poet));
 
   //?? Do strdup() here? Text is not manipulated, so there is no need to
   // You must free the text passed into here anyway outside of poet, so in
