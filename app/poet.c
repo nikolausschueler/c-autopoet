@@ -9,8 +9,7 @@
 
 #define SAME 0
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   int c = 0;
   int optionIndex = 0;
   int sleeptime = 0;
@@ -28,7 +27,7 @@ int main(int argc, char **argv)
    * acsii character codes getopt() returns for the single letter
    * options.
    */
-  enum { 
+  enum {
     opt_infile = 300,
     opt_outfile = 301,
     opt_wordlen = 302,
@@ -37,17 +36,18 @@ int main(int argc, char **argv)
     opt_sleep = 305,
     opt_typewriter = 306
   };
-  
+
   static struct option long_options[] = {
-    {"file", required_argument, 0, opt_infile},
-    {"output", required_argument, 0, opt_outfile},
-    {"wordlen", required_argument, 0, opt_wordlen},
-    {"seed", required_argument, 0, opt_seed},
-    {"help", no_argument, 0, opt_help},
-    {"sleep", required_argument, 0, opt_sleep},
-    {"typewriter", no_argument, 0, opt_typewriter},
-    {0, 0, 0, 0}
-  };
+                                          {"file", required_argument, 0, opt_infile
+                                          },
+                                          {"output", required_argument, 0, opt_outfile},
+                                          {"wordlen", required_argument, 0, opt_wordlen},
+                                          {"seed", required_argument, 0, opt_seed},
+                                          {"help", no_argument, 0, opt_help},
+                                          {"sleep", required_argument, 0, opt_sleep},
+                                          {"typewriter", no_argument, 0, opt_typewriter},
+                                          {0, 0, 0, 0}
+                                        };
 
   wordLen = 3;
 
@@ -102,14 +102,14 @@ int main(int argc, char **argv)
       printf("-w --wordlen wordLength\n");
       printf("\tThe word length to be used.\n");
       exit(1);
-      // This can never reached, but we learned in school to end a case 
+      // This can never reached, but we learned in school to end a case
       // with "break".
       break;
     default:
       break;
     }
-  } 
-  
+  }
+
   if(infileName) {
     if((fpin = fopen(infileName, "r")) == NULL) {
       fprintf(stderr, "Cannot open input file\n");
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
 
   poet = Poet_new(text, wordLen);
 
-  /*:-O 
+  /*:-O
    * If outfile is set, write the whole shebang to it. Else write
    * the whole stuff to the console; if sleeptime is set, write
    * in "demo mode", else simply write the whole output.
@@ -140,13 +140,13 @@ int main(int argc, char **argv)
     }
     else {
       while(Poet_hasNext(poet)) {
-	printf("%c", Poet_next(poet));
-	fflush(stdout);
-	usleep(sleeptime);
+        printf("%c", Poet_next(poet));
+        fflush(stdout);
+        usleep(sleeptime);
       }
       printf("\n");
     }
   }
   Poet_free(&poet);
   return 0;
-}			 		
+}

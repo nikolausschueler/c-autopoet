@@ -8,8 +8,7 @@
 
 #define SAME 0
 
-struct Poet_T 
-{
+struct Poet_T {
   Vector* successors;
   char* word;
   char* text;
@@ -22,11 +21,10 @@ struct Poet_T
 
 static char next(Poet* poet);
 
-Poet* Poet_new(char* text, int wordLength)
-{
+Poet* Poet_new(char* text, int wordLength) {
   int i = 0;
   Poet* poet = NULL;
-  
+
   if(strlen(text) < wordLength) {
     wrongo("Text to short for given word length", TRUE);
   }
@@ -43,9 +41,9 @@ Poet* Poet_new(char* text, int wordLength)
   poet->word = (char*) calloc(wordLength, sizeof(char));
   poet->wordlen = wordLength;
 
-  /*:-O 
+  /*:-O
    * Set the start word. This leaves "word" unterminated, but thats okay. 
-   */ 
+   */
   strncpy(poet->word, text, wordLength);
 
   poet->successors = Vector_new();
@@ -54,61 +52,55 @@ Poet* Poet_new(char* text, int wordLength)
   return poet;
 }
 
-void Poet_free(Poet** poet)
-{
+void Poet_free(Poet** poet) {
   assert(poet && *poet);
-  
+
   Vector_free(&((*poet)->successors));
   free((*poet)->word);
   free(*poet);
   *poet = NULL;
 }
 
-int Poet_count(Poet* poet)
-{
+int Poet_count(Poet* poet) {
   assert(poet);
-  
+
   return poet->count;
 }
 
-int Poet_getWordLength(Poet* poet)
-{
+int Poet_getWordLength(Poet* poet) {
   assert(poet);
 
   return poet->wordlen;
 }
 
-BOOL Poet_hasNext(Poet* poet)
-{
+BOOL Poet_hasNext(Poet* poet) {
   assert(poet);
-  
+
   return poet->hasNext;
 }
 
-char Poet_next(Poet* poet)
-{
+char Poet_next(Poet* poet) {
   char c;
   int randNum = 0;
   int i = 0;
 
   assert(poet);
   assert(poet->hasNext == TRUE);
-  
+
   if(poet->count < poet->wordlen) {
     c = poet->word[poet->count];
     poet->count++;
     return c;
   }
   else return next(poet);
-}			 		
+}
 
-char* Poet_output(Poet* poet)
-{
+char* Poet_output(Poet* poet) {
   char c;
   String* s = NULL;
-  
+
   assert(poet);
-  
+
   s = String_new();
   while(Poet_hasNext(poet)) {
     c = Poet_next(poet);
@@ -117,8 +109,7 @@ char* Poet_output(Poet* poet)
   return String_toChars(s);
 }
 
-static char next(Poet* poet)
-{
+static char next(Poet* poet) {
   //?? What would be a reasonable default to initialize a char with?
   char c;
   int i = 0;
@@ -127,8 +118,8 @@ static char next(Poet* poet)
   assert(poet);
 
   Vector_clear(poet->successors);
-  
-  /*:-O 
+
+  /*:-O
    * Look for all successors of current word. This stops at "wordlen"
    * chars before the end of the string (textlen is the position of the
    * \0), so that one possible successor
@@ -145,7 +136,7 @@ static char next(Poet* poet)
   /*:-O If end of text is reached, stop. */
   if(c == '\0') {
     poet->hasNext = FALSE;
-    /*:-O 
+    /*:-O
      * If poet has reached the end of text, return end-of-string.
      */
     //??? Should we return this '\0' or an EOF?
