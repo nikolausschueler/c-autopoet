@@ -111,6 +111,7 @@ int main(int argc, char **argv)
   else {
     while(Poet_hasNext(poet)) {
       printf("%c", Poet_next(poet));
+      fflush(stdout);
       usleep(sleeptime);
     }
   }

@@ -119,19 +119,22 @@ static char next(Poet* poet)
       Vector_add(poet->successors, poet->text + i + poet->wordlen);
     }
   }
-  randNum = (int) (Vector_size(poet->successors) * (double) random()/ RAND_MAX);
-  c = *((char*) (Vector_elem(poet->successors, randNum)));
-  
+  /*:-O If we found at least one successor, choose randomly. */
+  if(Vector_size(poet->successors) > 0) {
+    randNum = (int) (Vector_size(poet->successors) * (double) random()/ RAND_MAX);
+    c = *((char*) (Vector_elem(poet->successors, randNum)));
+    shiftstr(poet->word, c);
+    poet->count++;
+  }
   /*:-O If end of text is reached, stop. */
-  if(c == '\0') {
+  else {
     printf("reached the end!!!");
     poet->hasNext = FALSE;
+    /*:-O 
+     * If poet has reached the end of text, return end-of-string. 
+     */
+    c = '\0';
   }
-  shiftstr(poet->word, c);
-  poet->count++;
 
-  /*:-O 
-   * If poet has reached the end of text, return end-of-string. 
-   */
   return c;
 }
