@@ -2,7 +2,9 @@
 
 special_file=`pwd`/../../../text/util/special.xml
 topic_file=`pwd`/../../../text/util/topic.xml
+logo_file=`pwd`/logo.xml
 
 db2html --mangle "http://www.drnik.org/c/poet->.." \
-  --toplevel article ../../../text/prog_doc/m_c_base.xml \
-  --special ${special_file} --topic ${topic_file}
+  --toplevel article ../../../text/prog_doc/m_c_poet.xml \
+  --special ${special_file} --topic ${topic_file} \
+  logo-file=${logo_file}
