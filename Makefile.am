@@ -1,3 +1,5 @@
+EXTRA_DIST = Doxyfile
+
 SUBDIRS = lib app doc
 
 dist-hook:
