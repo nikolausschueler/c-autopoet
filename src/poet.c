@@ -9,8 +9,7 @@
 
 #include <nik/base.h>
 
-//??? Hotfix. It should not be necessary to use an explicit path here.
-#include "../lib/poet.h"
+#include "poet.h"
 
 #define SAME 0
 
