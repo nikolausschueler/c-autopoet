@@ -1,7 +1,3 @@
-/* Versuch ueber einen automatischen Schriftsteller. Die Resultate sind
- * jedoch mit denen eines echten nicht zu vergleichen.
- */
-
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -87,7 +83,6 @@ char Poet_next(Poet* poet)
   else return next(poet);
 }			 		
 
-
 char* Poet_output(Poet* poet)
 {
   char c;
@@ -114,26 +109,33 @@ static char next(Poet* poet)
 
   Vector_clear(poet->successors);
   
-  for(i = 0; i < poet->textlen - poet->wordlen; i++) {
+  /*:-O 
+   * Look for all successors of current word. This stops at "wordlen"
+   * chars before the end of the string (textlen is the position of the
+   * \0), so that one possible successor
+   * is the \0 ending the string (and indicating that we are finished).
+   */
+  for(i = 0; i <= poet->textlen - poet->wordlen; i++) {
     if(strncmp(poet->text + i, poet->word, poet->wordlen) == SAME) {
       Vector_add(poet->successors, poet->text + i + poet->wordlen);
     }
   }
-  /*:-O If we found at least one successor, choose randomly. */
-  if(Vector_size(poet->successors) > 0) {
-    randNum = (int) (Vector_size(poet->successors) * (double) random()/ RAND_MAX);
-    c = *((char*) (Vector_elem(poet->successors, randNum)));
-    shiftstr(poet->word, c);
-    poet->count++;
-  }
+  /*:-O Randomly choose one of the successors. */
+  randNum = (int) (Vector_size(poet->successors) * (double) random()/ RAND_MAX);
+  c = *((char*) (Vector_elem(poet->successors, randNum)));
   /*:-O If end of text is reached, stop. */
-  else {
-    printf("reached the end!!!");
+  if(c == '\0') {
     poet->hasNext = FALSE;
     /*:-O 
-     * If poet has reached the end of text, return end-of-string. 
+     * If poet has reached the end of text, return end-of-string.
      */
+    //??? Should we return this '\0' or an EOF?
     c = '\0';
+  }
+  /*:-O Else prepare for next call of this function. */
+  else {
+    shiftstr(poet->word, c);
+    poet->count++;
   }
 
   return c;

@@ -24,6 +24,8 @@ int main(int argc, char **argv)
   char* outfileName = NULL;
   char* text = NULL;
   FILE *fpin = NULL;
+  FILE *fpout = NULL;
+  String* str;
 
   /*
    * Use numbers > 256 here, so they dont get confused with the 
@@ -104,19 +106,34 @@ int main(int argc, char **argv)
   else fpin = stdin;
 
   text = toBuf(fpin);
+  
   Poet* poet = Poet_new(text, wordLen);
-  if(sleeptime == 0) {
-    printf("%s", Poet_output(poet));
+
+  /*:-O 
+   * If outfile is set, write the whole shebang to it. Else write
+   * the whole stuff to the console; if sleeptime is set, write
+   * in "demo mode", else simply write the whole output.
+   */
+  if(outfileName) {
+    if((fpout = fopen(outfileName, "w")) == NULL) {
+      fprintf(stderr, "Cannot open output file\n");
+      exit(1);
+    }
+    fprintf(fpout, "%s\n", Poet_output(poet));
   }
   else {
-    while(Poet_hasNext(poet)) {
-      printf("%c", Poet_next(poet));
-      fflush(stdout);
-      usleep(sleeptime);
+    if(sleeptime == 0) {
+      printf("%s\n", Poet_output(poet));
+    }
+    else {
+      while(Poet_hasNext(poet)) {
+	printf("%c", Poet_next(poet));
+	fflush(stdout);
+	usleep(sleeptime);
+      }
+      printf("\n");
     }
   }
-  //??? outfile is not considered in the moment, because poet() writes
-  // directly to screen.
   
   //??? Implement: Poet_free(&poet);
   return 0;
