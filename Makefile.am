@@ -1,4 +1,4 @@
-EXTRA_DIST = Doxyfile
+EXTRA_DIST = Doxyfile exampledata/*.txt
 
 SUBDIRS = lib app
 

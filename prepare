@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Copy some stuff here thats needed. I dont want to put this into the makefile,
+# because its to un-related to the make process for this package.
+(cd doc && source prepare-doc)
+(cd exampledata && source prepare-data)
