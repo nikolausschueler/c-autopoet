@@ -6,39 +6,22 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <baselib.h>
-#include <misc_c.h>
+#include <nik/base.h>
+//#include <misc_c.h>
 
 #define SAME 0
 
-void main(int argc, char **argv)
+void poet(FILE* fpin, int wordLen)
 {
-  int fileLen = 0;
-  int wordLen = 0;
-  int i;
-  int randNum;
   char c;
-  char* text;
-  char* word;
-  struct vec* successors;
-  FILE *fpin;
-  
-  successors = vec_new();
+  char* word = NULL;
+  char* text = NULL;
+  int fileLen = 0;
+  int randNum = 0;
+  int i = 0;
+  Vector* successors;
 
-  if(argc < 3) {
-    printf("usage: %s <filename> <wordLength> [random seed]\n", argv[0]);
-    exit(1);
-  }
-  if((fpin = fopen(argv[1], "r")) == NULL) {
-    printf("%s: Cannot open input file  %s .\n", argv[0], argv[1]);
-    exit(1);
-  }
-  wordLen = atoi(argv[2]); /* Falsch. Nur fuer Debugger-Test. */
-
-  // Optionales Argument
-  if(argc > 3) {
-    srandom(atoi(argv[3]));
-  }
+  successors = Vector_new();
 
   word = (char*) calloc(wordLen, sizeof(char));
   fileLen = getlen(fpin);
@@ -51,15 +34,15 @@ void main(int argc, char **argv)
   }
   
   while(1) {
-    vec_clear(successors);
+    Vector_clear(successors);
 
     for(i = 0; i < fileLen - wordLen; i++) {
       if(strncmp(text + i, word, wordLen) == SAME) {
-	vec_add(successors, text + i + wordLen);
+	Vector_add(successors, text + i + wordLen);
       }
     }
-    randNum = (int) (successors->size * (double) random()/ RAND_MAX);
-    c = *((char*) (successors->elems[randNum]));
+    randNum = (int) (Vector_size(successors) * (double) random()/ RAND_MAX);
+    c = *((char*) (Vector_elem(successors, randNum)));
 
     /* Fuer logging:
     for(i = 0; i < successors->size; i++) {
