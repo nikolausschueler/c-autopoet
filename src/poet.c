@@ -105,7 +105,15 @@ int main(int argc, char **argv)
 
   text = toBuf(fpin);
   Poet* poet = Poet_new(text, wordLen);
-  printf("%s", Poet_output(poet));
+  if(sleeptime == 0) {
+    printf("%s", Poet_output(poet));
+  }
+  else {
+    while(Poet_hasNext(poet)) {
+      printf("%c", Poet_next(poet));
+      usleep(sleeptime);
+    }
+  }
   //??? outfile is not considered in the moment, because poet() writes
   // directly to screen.
   

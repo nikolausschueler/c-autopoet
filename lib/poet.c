@@ -124,6 +124,7 @@ static char next(Poet* poet)
   
   /*:-O If end of text is reached, stop. */
   if(c == '\0') {
+    printf("reached the end!!!");
     poet->hasNext = FALSE;
   }
   shiftstr(poet->word, c);
