@@ -1,6 +1,6 @@
 EXTRA_DIST = Doxyfile
 
-SUBDIRS = lib app doc
+SUBDIRS = lib app
 
 dist-hook:
 	echo "DISTHOOK WAS CALLED"
