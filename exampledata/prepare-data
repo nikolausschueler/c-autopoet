@@ -1,5 +1,6 @@
 #!/bin/sh
 
+cp ../../../../../data/poet-input/business.txt .
 cp ../../../../../data/poet-input/heidegger.txt .
 cp ../../../../../data/poet-input/proust.txt .
 
