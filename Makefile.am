@@ -1,4 +1,4 @@
-EXTRA_DIST = Doxyfile exampledata/*.txt
+EXTRA_DIST = Doxyfile exampledata/*.txt doc/overview.html apidoc
 
 SUBDIRS = lib app
 
