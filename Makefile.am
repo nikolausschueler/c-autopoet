@@ -1,4 +1,4 @@
-SUBDIRS = lib src
+SUBDIRS = lib app
 
 doc:
 	doxygen
