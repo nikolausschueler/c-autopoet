@@ -1,4 +1,4 @@
-SUBDIRS = lib app
+SUBDIRS = lib app doc
 
 dist-hook:
 	echo "DISTHOOK WAS CALLED"
@@ -6,11 +6,11 @@ dist-hook:
 install-hook:
 	echo "INSTALLHOOK WAS CALLED"
 
-doc:
+apidoc:
 	doxygen
 
 # This removes the doc dir, so it doesnt clutter up CVS with its files
 # when committing. ??? How can i arrange for this to be called from
 # make maintainer-clean?
 docclean:
-	rm -fr doc
+	rm -fr apidoc
