@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cp ../../../data/poet/business.txt .
+cp ../../../data/poet/heidegger.txt .
+cp ../../../data/poet/proust.txt .
+
