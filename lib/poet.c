@@ -56,7 +56,7 @@ Poet* Poet_new(char* text, int wordLength)
 
 void Poet_free(Poet** poet)
 {
-  assert(*poet);
+  assert(poet && *poet);
   
   Vector_free(&((*poet)->successors));
   free((*poet)->word);
