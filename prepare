@@ -4,3 +4,4 @@
 # because its to un-related to the make process for this package.
 (cd doc && source prepare-doc)
 (cd exampledata && source prepare-data)
+source ./prepare-autotools
