@@ -34,8 +34,10 @@ Poet* Poet_new(char* text, int wordLength)
   poet->word = (char*) calloc(wordLength, sizeof(char));
   poet->wordlen = wordLength;
 
-  /*:-O Set the start word. */ 
-  for(i = 0; i < wordLength; i++) poet->word[i] = text[i];
+  /*:-O 
+   * Set the start word. This leaves "word" unterminated, but thats okay. 
+   */ 
+  strncpy(poet->word, text, wordLength);
 
   poet->successors = Vector_new();
   poet->hasNext = TRUE;

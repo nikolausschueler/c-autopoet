@@ -105,7 +105,7 @@ int main(int argc, char **argv)
   else fpin = stdin;
 
   text = toBuf(fpin);
-  
+
   Poet* poet = Poet_new(text, wordLen);
 
   /*:-O 
