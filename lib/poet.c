@@ -22,11 +22,6 @@ struct Poet_T
 
 static char next(Poet* poet);
 
-/**
- * Make a new Poet, initialized with <code>text</code>,
- * and the required word-length.
- * <code>text</code> must be a NULL-terminated string.
- */
 Poet* Poet_new(char* text, int wordLength)
 {
   int i = 0;
@@ -53,9 +48,6 @@ Poet* Poet_new(char* text, int wordLength)
   return poet;
 }
 
-/**
- * Deallocate that Poet, setting the pointer to it to <code>NULL</code>.
- */
 void Poet_free(Poet** poet)
 {
   assert(*poet);
@@ -73,9 +65,6 @@ int Poet_count(Poet* poet)
   return poet->count;
 }
 
-/** 
- * Return the word-length used by Poet.
- */
 int Poet_getWordLength(Poet* poet)
 {
   assert(poet);
@@ -83,14 +72,6 @@ int Poet_getWordLength(Poet* poet)
   return poet->wordlen;
 }
 
-/**
- * Indicates if Poet can proceed or if it has reached the end of the
- * text.
- * @return <ul>
- *          <li><code>TRUE</code> if Poet can proceed,</li>
- *          <li><code>FALSE</code> if end of text has been reached.</li>
- *         </ul>
- */
 BOOL Poet_hasNext(Poet* poet)
 {
   assert(poet);
@@ -98,17 +79,6 @@ BOOL Poet_hasNext(Poet* poet)
   return poet->hasNext;
 }
 
-/**
- * Return the next char. This function is mainly intended to do output
- * for animation purposes, for example by sleeping several milliseconds
- * and the showing the next letter.
- * If code was compiled with assertions enabled and end of text has been
- * reached already (Poet_hasNext() returns <code>FALSE</code>), calling
- * this function makes an assertion fail and stops the program.
- * @remarks Should the return type be <code>char*</code>, so the interface 
- * remains the same if i one day enhance this to handle whole words
- * instead of single characters? 
- */
 char Poet_next(Poet* poet)
 {
   char c;
@@ -126,10 +96,6 @@ char Poet_next(Poet* poet)
   else return next(poet);
 }			 		
 
-/**
- * This returns the whole output at once.
- * @todo Document interactions between Poet_next() and Poet_output().
- */
 char* Poet_output(Poet* poet)
 {
   char c;
