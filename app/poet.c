@@ -1,7 +1,3 @@
-/* Versuch ueber einen automatischen Schriftsteller. Die Resultate sind
- * jedoch mit denen eines echten nicht zu vergleichen.
- */
-
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,6 +21,7 @@ int main(int argc, char **argv)
   FILE *fpin = NULL;
   FILE *fpout = NULL;
   String* str;
+  Poet* poet;
 
   /*
    * Use numbers > 256 here, so they dont get confused with the 
@@ -106,7 +103,7 @@ int main(int argc, char **argv)
 
   text = toBuf(fpin);
 
-  Poet* poet = Poet_new(text, wordLen);
+  poet = Poet_new(text, wordLen);
 
   /*:-O 
    * If outfile is set, write the whole shebang to it. Else write
