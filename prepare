@@ -5,3 +5,5 @@
 (cd doc && source prepare-doc)
 (cd exampledata && source prepare-data)
 prepare-autotools
+
+./configure
