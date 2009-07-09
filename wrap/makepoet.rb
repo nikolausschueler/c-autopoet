@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+#
 # This script builds and installs my C poet stuff as a ruby module. It uses
 # swig (http://www.swig.org).
 
