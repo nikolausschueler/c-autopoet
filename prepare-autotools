@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# Make stuff autotool-ready.
-aclocal
-autoheader
-automake --copy --add-missing
-autoconf
