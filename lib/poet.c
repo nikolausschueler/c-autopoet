@@ -132,7 +132,7 @@ static char next(Poet* poet) {
   }
   /*:-O Randomly choose one of the successors. */
   randNum = (int) (Vector_size(poet->successors) * (double) random()/ RAND_MAX);
-  c = *((char*) (Vector_elem(poet->successors, randNum)));
+  c = *((char*) (Vector_get(poet->successors, randNum)));
   /*:-O If end of text is reached, stop. */
   if(c == '\0') {
     poet->hasNext = FALSE;
