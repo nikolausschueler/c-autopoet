@@ -8,12 +8,13 @@ LIB_OBJS = $(LIB_DIR)/poet.o
 OBJS = $(APP_OBJS) $(LIB_OBJS)
 INCLUDES = -I. -I./lib
 CFLAGS = $(INCLUDES) -DHAVE_CONFIG_H
+BASE_LIB = -lNikBaseC
 
 .PHONY: all
 all: $(APP_FILE)
 
 $(APP_FILE): $(APP_OBJS) $(LIB_FILE)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ $(BASE_LIB)
 
 $(LIB_FILE): $(LIB_OBJS)
 	$(AR) $(ARFLAGS) $@ $^
