@@ -2,12 +2,6 @@ EXTRA_DIST = Doxyfile exampledata/*.txt doc/overview.html apidoc
 
 SUBDIRS = lib app
 
-dist-hook:
-	echo "DISTHOOK WAS CALLED"
-
-install-exec-hook:
-	echo "INSTALL-EXEC-HOOK WAS CALLED"
-
 apidoc:
 	doxygen
 
