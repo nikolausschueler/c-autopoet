@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(lib/poet.c)
-AM_CONFIG_HEADER(config.h)
+AC_CONFIG_HEADERS([config.h])
 
 dnl Checks for programs.
 AC_PROG_MAKE_SET
@@ -19,3 +19,5 @@ AC_MSG_ERROR(Nik's base lib required but it doesn't seem to be installed here))
 dnl Checks for header files.
 AC_HEADER_STDC
 AC_CHECK_HEADERS([getopt.h])
+
+AC_OUTPUT()
