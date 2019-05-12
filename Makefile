@@ -2,6 +2,7 @@ ARFLAGS = rcs
 APP_DIR = app
 APP_FILE = $(APP_DIR)/poet
 APP_OBJS = $(APP_DIR)/poet.o $(APP_DIR)/getoptions.o
+APP_SRC = $(APP_DIR)/poet.c $(APP_DIR)/getoptions.c
 LIB_DIR = lib
 LIB_FILE = $(LIB_DIR)/libpoet.la
 LIB_OBJS = $(LIB_DIR)/poet.o
@@ -10,11 +11,14 @@ INCLUDES = -I. -I./lib
 CFLAGS = $(INCLUDES) -DHAVE_CONFIG_H
 BASE_LIB = -lNikBaseC
 
+#%.o: %.c
+#$(CC) $(CFLAGS) $(INCLUDES) -o $@ `pkg-config --cflags glib-2.0` $<
+
 .PHONY: all
 all: $(APP_FILE)
 
-$(APP_FILE): $(APP_OBJS) $(LIB_FILE)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ $(BASE_LIB)
+$(APP_FILE): $(APP_SRC) $(LIB_FILE)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ `pkg-config --cflags glib-2.0` $^ `pkg-config --libs glib-2.0` $(BASE_LIB)
 
 $(LIB_FILE): $(LIB_OBJS)
 	$(AR) $(ARFLAGS) $@ $^
