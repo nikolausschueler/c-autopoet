@@ -8,17 +8,14 @@ LIB_FILE = $(LIB_DIR)/libpoet.la
 LIB_OBJS = $(LIB_DIR)/poet.o
 OBJS = $(APP_OBJS) $(LIB_OBJS)
 INCLUDES = -I. -I./lib
-CFLAGS = $(INCLUDES) -DHAVE_CONFIG_H
+CFLAGS = $(INCLUDES) -DHAVE_CONFIG_H `pkg-config --cflags glib-2.0`
 BASE_LIB = -lNikBaseC
-
-#%.o: %.c
-#$(CC) $(CFLAGS) $(INCLUDES) -o $@ `pkg-config --cflags glib-2.0` $<
 
 .PHONY: all
 all: $(APP_FILE)
 
 $(APP_FILE): $(APP_SRC) $(LIB_FILE)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ `pkg-config --cflags glib-2.0` $^ `pkg-config --libs glib-2.0` $(BASE_LIB)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ `pkg-config --libs glib-2.0` $(BASE_LIB)
 
 $(LIB_FILE): $(LIB_OBJS)
 	$(AR) $(ARFLAGS) $@ $^
