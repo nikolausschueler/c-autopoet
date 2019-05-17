@@ -10,7 +10,7 @@
 #define SAME 0
 
 struct Poet_T {
-  Vector* successors;
+  GArray* successors;
   char* word;
   char* text;
   int textlen;
@@ -47,7 +47,7 @@ Poet* Poet_new(char* text, int wordLength) {
    */
   strncpy(poet->word, text, wordLength);
 
-  poet->successors = Vector_new();
+  poet->successors = g_array_new(FALSE, FALSE, sizeof(char));
   poet->hasNext = TRUE;
 
   return poet;
@@ -56,7 +56,7 @@ Poet* Poet_new(char* text, int wordLength) {
 void Poet_free(Poet** poet) {
   assert(poet && *poet);
 
-  Vector_free(&((*poet)->successors));
+  g_array_free((*poet)->successors, TRUE);
   free((*poet)->word);
   free(*poet);
   *poet = NULL;
@@ -118,7 +118,7 @@ static char next(Poet* poet) {
 
   assert(poet);
 
-  Vector_clear(poet->successors);
+  g_array_remove_range(poet->successors, 0, poet->successors->len);
 
   /*:-O
    * Look for all successors of current word. This stops at "wordlen"
@@ -128,12 +128,12 @@ static char next(Poet* poet) {
    */
   for(i = 0; i <= poet->textlen - poet->wordlen; i++) {
     if(strncmp(poet->text + i, poet->word, poet->wordlen) == SAME) {
-      Vector_add(poet->successors, poet->text + i + poet->wordlen);
+      g_array_append_val(poet->successors, *(poet->text + i + poet->wordlen));
     }
   }
   /*:-O Randomly choose one of the successors. */
-  randNum = (int) (Vector_size(poet->successors) * (double) random()/ RAND_MAX);
-  c = *((char*) (Vector_get(poet->successors, randNum)));
+  randNum = (int) (poet->successors->len * (double) random()/ RAND_MAX);
+  c = g_array_index(poet->successors, char, randNum);
   /*:-O If end of text is reached, stop. */
   if(c == '\0') {
     poet->hasNext = FALSE;
