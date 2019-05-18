@@ -65,10 +65,10 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
-    apt-get install -y gcc make
+    apt-get install -y autoconf gcc libglib2.0-dev make pkg-config
     cd /vagrant && make clean
     cd /vagrant && ./bootstrap
     cd /vagrant && ./configure
-    cd /vagrant && make
+    cd /vagrant && make test
   SHELL
 end

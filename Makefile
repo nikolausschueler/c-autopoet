@@ -50,3 +50,8 @@ apidoc:
 # make maintainer-clean?
 docclean:
 	rm -fr apidoc
+
+.PHONY: vagrant
+vagrant:
+	- vagrant destroy -f
+	vagrant up
