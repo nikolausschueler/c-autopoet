@@ -1,3 +1,5 @@
+INSTALL = install
+DESTDIR = /usr/local/bin
 ARFLAGS = rcs
 APP_DIR = app
 TEST_DIR = test
@@ -29,6 +31,10 @@ $(LIB_FILE): $(LIB_OBJS)
 .PHONY: test
 test: $(TEST_FILE)
 	$(TEST_FILE)
+
+.PHONY: install
+install: $(APP_FILE)
+	$(INSTALL) $(APP_FILE) $(DESTDIR)
 
 .PHONY: clean
 clean:
