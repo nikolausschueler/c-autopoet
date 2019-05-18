@@ -14,16 +14,15 @@ LIB_OBJS = $(LIB_DIR)/poet.o
 OBJS = $(APP_OBJS) $(LIB_OBJS)
 INCLUDES = -I. -I./lib
 CFLAGS = $(INCLUDES) -DHAVE_CONFIG_H `pkg-config --cflags glib-2.0`
-BASE_LIB = -lNikBaseC
 
 .PHONY: all
 all: $(APP_FILE) $(TEST_FILE)
 
 $(APP_FILE): $(APP_SRC) $(LIB_FILE)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ `pkg-config --libs glib-2.0` $(BASE_LIB)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ `pkg-config --libs glib-2.0`
 
 $(TEST_FILE): $(TEST_SRC) $(LIB_FILE)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ `pkg-config --libs glib-2.0` $(BASE_LIB)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ `pkg-config --libs glib-2.0`
 
 $(LIB_FILE): $(LIB_OBJS)
 	$(AR) $(ARFLAGS) $@ $^

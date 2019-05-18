@@ -4,18 +4,25 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <nik/base.h>
 #include "poet.h"
 
 #define SAME 0
 
+/*
+ * Forward declaration.
+ */
+void shiftstr(char *str, char c);
+
+/*
+ * The Poet abstract datatype. Definition and functions.
+ */
 struct Poet_T {
   GArray* successors;
   char* word;
   char* text;
   int textlen;
   int wordlen;
-  BOOL hasNext;
+  bool hasNext;
   // This counts how many character have already been processed.
   int count;
 };
@@ -27,7 +34,8 @@ Poet* Poet_new(char* text, int wordLength) {
   Poet* poet = NULL;
 
   if(strlen(text) < wordLength) {
-    wrongo("Text to short for given word length", TRUE);
+    fprintf(stderr, "Text to short for given word length\n");
+    exit(1);
   }
 
   poet = calloc(1, sizeof(Poet));
@@ -74,7 +82,7 @@ int Poet_getWordLength(Poet* poet) {
   return poet->wordlen;
 }
 
-BOOL Poet_hasNext(Poet* poet) {
+bool Poet_hasNext(Poet* poet) {
   assert(poet);
 
   return poet->hasNext;
@@ -150,4 +158,16 @@ static char next(Poet* poet) {
   }
 
   return c;
+}
+
+/*
+ * Helpers.
+ */
+void shiftstr(char *str, char c)
+{
+  int i;
+
+  for(i = 0; i < (strlen(str) - 1); i++)
+    str[i] = str[i + 1];
+  str[strlen(str) - 1] = c;
 }

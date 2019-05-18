@@ -1,7 +1,7 @@
 #ifndef POET_H
 #define POET_H
 
-#include <nik/base.h>
+#include <stdbool.h>
 
 /**
  * @file
@@ -43,7 +43,7 @@ int Poet_getWordLength(Poet* poet);
  *         </ul>
  */
 
-BOOL Poet_hasNext(Poet* poet);
+bool Poet_hasNext(Poet* poet);
 /**
  * Return the next char. This function is mainly intended to do output
  * for animation purposes, for example by sleeping several milliseconds

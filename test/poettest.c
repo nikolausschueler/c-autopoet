@@ -15,7 +15,7 @@ void test_wordlen_fail() {
   }
   g_test_trap_subprocess(NULL, 0, 0);
   g_test_trap_assert_failed();
-  g_test_trap_assert_stderr("\nText to short for given word length\n");
+  g_test_trap_assert_stderr("Text to short for given word length\n");
 }
 
 int main(int argc, char **argv) {

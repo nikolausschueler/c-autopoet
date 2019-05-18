@@ -7,13 +7,19 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include <nik/base.h>
-
 #include "poet.h"
 #include "getoptions.h"
 
 #define SAME 0
 
+/*
+ * Forward declaration.
+ */
+char* toBuf(FILE* fp);
+
+/*
+ * Main: the real meat.
+ */
 int main(int argc, char* argv[]) {
 
   int sleeptime = 0;
@@ -23,7 +29,6 @@ int main(int argc, char* argv[]) {
   char* text = NULL;
   FILE *fpin = NULL;
   FILE *fpout = NULL;
-  String* str;
   Poet* poet;
 
   wordLen = 3;
@@ -69,4 +74,21 @@ int main(int argc, char* argv[]) {
   }
   Poet_free(&poet);
   return 0;
+}
+
+/*
+ * Little helper that reads a file into a char array.
+ */
+char* toBuf(FILE* fp)
+{
+  char* buf;
+  char tmpbuf[100];
+  GString* str = NULL;
+
+  str = g_string_new(NULL);
+  while(fgets(tmpbuf, 100, fp)) {
+    g_string_append(str, tmpbuf);
+  }
+  buf = str->str;
+  return buf;
 }
