@@ -48,3 +48,15 @@ https://www.gnu.org/software/libc/). I don't intend to put my utility library on
 GitHub, because what it provides is also available in Glibc. Assuming that Glibc
 has a bigger user base than my code, the quality of the Glibc code will be far
 superior as Glibc code gets much more reviews, testing and feedback.
+
+Notes
+=====
+
+As I never really was able to wrap my head around Automake, I went back to a
+hand-written Makefile. I kept configure, though. This is the way it is done in
+the Git sourcecode and as Git's sourcecode is a good example of a clean build
+setup, I tried to modell my Makefile after it.
+
+As the not-so-successful use of Automake in recent years surely weakenend my
+Makefile writing skills, the Makefile surely leaves room for improvment, but it
+works and I think it's a good starting point.
