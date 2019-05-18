@@ -98,16 +98,16 @@ char Poet_next(Poet* poet) {
 
 char* Poet_output(Poet* poet) {
   char c;
-  String* s = NULL;
+  GString *s = NULL;
 
   assert(poet);
 
-  s = String_new();
+  s = g_string_new(NULL);
   while(Poet_hasNext(poet)) {
     c = Poet_next(poet);
-    String_add(s, c);
+    g_string_append(s, &c);
   }
-  return String_toChars(s);
+  return s->str;
 }
 
 static char next(Poet* poet) {
