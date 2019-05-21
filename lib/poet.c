@@ -113,7 +113,7 @@ char* Poet_output(Poet* poet) {
   s = g_string_new(NULL);
   while(Poet_hasNext(poet)) {
     c = Poet_next(poet);
-    g_string_append(s, &c);
+    g_string_append_c(s, c);
   }
   return s->str;
 }
