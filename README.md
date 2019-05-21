@@ -36,6 +36,49 @@ you can set up a Vagrant VM where the code is built and the tests are run. This
 of course requires that you have Vagrant installed. You can get it here:
 https://www.vagrantup.com/.
 
+An example
+==========
+
+This shows the algorithm applied to a text snippet of the German philosopher
+Martin Heidegger:
+
+```
+Das Dasein ist ein Seiendes, das nicht nur unter anderem Seienden vorkommt. Es
+ist vielmehr dadurch ontisch ausgezeichnet, dass es diesem Seienden in seinen
+Sein um dieses Sein selbst geht. Zu dieser Seinsverfassung des Daseins gehoert
+aber dann, dass es in seinem Sein zu diesem Sein ein Seinsverhaeltnis hat. Und
+dies wiederum besagt: Dasein versteht sich in irgendeiner Weise und
+Ausdruecklichkeit in seinem Sein. Diesem Seienden eignet, dass mit und durch
+sein Sein dieses ihm selbst erschlossen ist. Seinsverstaendnis ist selbst eine
+Seinsbestimmtheit des Daseins. Die ontische Auszeichnung des Daseins liegt
+daran, dass es ontologisch ist.
+```
+
+Save the text to a file and run the program with:
+
+```
+$ poet -f -w 4 heidegger.txt
+```
+
+This gives you:
+
+```
+Das Daseinem Seins liegt daran, dass es ihm selbst ein ist. Seienden in
+irgendeinem Seinsverhaeltnis ist. Sein. Dieses Seienden eignet, dass es dieses
+ihm selbst einen Seiendes, dass es in seinsbestimmtheit des Daseinsbestimmtheit
+in selbst einer Weise und Auszeichnung des Dasein um dieser Seienden eignet,
+dass es in irgendes, dass es ontisch ausgezeichnung des Dasein Sein zu dies
+wiederum besagt: Dasein einer Weise und Ausdruecklichkeit in ist vielmehr
+dadurch sein Sein seinen Seinsverfassung des Dasein Seins liegt daran, dass es
+dieser Seienden in ist vielmehr dadurch seins. Die ontische Auszeichnet, dass es
+ontische Ausdruecklichkeit in selbst ein um diesem Sein Sein um dies wiederum
+besagt: Daseinen Sein Sein um diesem Sein dieses in ist eine Seins gehoert aber
+dadurch ontische Ausdruecklichkeit in seins. Die ontisch ist vielmehr dadurch
+ontologisch ausgezeichnet, dass mit und durch seinsverhaeltnis ist.
+```
+
+Can you spot the difference?
+
 History
 =======
 
