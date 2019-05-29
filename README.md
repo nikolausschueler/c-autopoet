@@ -92,6 +92,21 @@ GitHub, because what it provides is also available in Glibc. Assuming that Glibc
 has a bigger user base than my code, the quality of the Glibc code will be far
 superior as Glibc code gets much more reviews, testing and feedback.
 
+Implemenation notes
+===================
+
+Poet is implemented as an Abstract Data Type (ADT). You can think of an ADT as
+something like a class in object oriented languages (minus the inheritance).
+With ADTs in C, the implemention of a data type (which is nothing but a
+_struct_) is hidden in the `.c` file, it is not published in the header file.
+Access to this struct is only via accessor methods. This helps keeping the data
+structure consistent. Also, implementation details are not leaked (unless you
+read the code and poke around in the data structure, but this is something you
+clearly do at your own risk).
+
+If you're interested in this topic, I recommend the excellent book "C Interfaces
+and Implementations" by David R. Hanson, published by Addison Wesley.
+
 Notes
 =====
 
