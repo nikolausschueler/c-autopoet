@@ -118,3 +118,18 @@ build setup, I tried to modell my Makefile after it.
 As the not-so-successful use of Automake in recent years surely weakenend my
 Makefile writing skills, the Makefile surely leaves room for improvment, but it
 works and I think it's a good starting point.
+
+What do those comments with an emoticon mean?
+==============================================
+
+Some comments start with
+
+```
+/*:-O
+```
+
+Those comments indicate "explaining comments". I once had the idea of "poor mans
+literate programming" where such comments contain some explanation of what
+happens in the code. These explanations should then be compiled into a text with
+explanations, interspersed with code snippets. I didn't follow up on that idea,
+but I still use the emoticon to mark comments that try to explain something.
