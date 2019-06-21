@@ -4,6 +4,13 @@ What is it?
 This is my Autopoet program, written in C. It is an implementation of the
 "Dissociated Press" algorithm https://en.wikipedia.org/wiki/Dissociated_press.
 
+Summed up, the algorithm works like this: Select some sequence of letters from
+the file.  Typically, you would start at the beginning of the text. Find all
+successors of the sequence. Choose one randomly. Drop the first letter of the
+sequence and add the successor to the end. Repeat the search for successors with
+this new sequence. When the sequence matches right at the end of the text, there
+is no successor. Stop.
+
 I use it as an extended form of "Hello World" when I want to play with a
 programming language.
 
