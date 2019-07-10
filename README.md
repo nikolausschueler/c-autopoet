@@ -114,18 +114,6 @@ clearly do at your own risk).
 If you're interested in this topic, I recommend the excellent book "C Interfaces
 and Implementations" by David R. Hanson, published by Addison Wesley.
 
-Notes
-=====
-
-As I never really was able to wrap my head around Automake and Libtool, I went
-back to a hand-written Makefile. I kept configure, though. This is the way it is
-done in the Git sourcecode and as Git's sourcecode is a good example of a clean
-build setup, I tried to modell my Makefile after it.
-
-As the not-so-successful use of Automake in recent years surely weakenend my
-Makefile writing skills, the Makefile surely leaves room for improvment, but it
-works and I think it's a good starting point.
-
 What do those comments with an emoticon mean?
 ==============================================
 
