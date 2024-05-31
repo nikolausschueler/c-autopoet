@@ -18,9 +18,29 @@ void test_wordlen_fail() {
   g_test_trap_assert_stderr("Text to short for given word length\n");
 }
 
+void test_next() {
+  Poet *p = NULL;
+  p = Poet_new("abcdabceabcfabc", 3);
+  char n;
+
+  /*
+   * Advance three times to eat up the "abc".
+   */
+  n = Poet_next(p);
+  n = Poet_next(p);
+  n = Poet_next(p);
+
+  /*
+   * The next value must be one of the possible successors.
+   */
+  n = Poet_next(p);
+  g_assert(n == 'd' || n == 'e' || n == 'f' || n == '\0');
+}
+
 int main(int argc, char **argv) {
     g_test_init(&argc, &argv, NULL);
     g_test_add_func("/set1/test wordlen", test_wordlen);
     g_test_add_func("/set1/test wordlen fail", test_wordlen_fail);
+    g_test_add_func("/set1/test next", test_next);
     return g_test_run();
 }
