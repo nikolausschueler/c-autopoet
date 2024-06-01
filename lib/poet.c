@@ -89,7 +89,7 @@ bool Poet_hasNext(Poet* poet) {
 }
 
 char Poet_next(Poet* poet) {
-  char c;
+  char c = 0;
   int randNum = 0;
   int i = 0;
 
@@ -105,7 +105,7 @@ char Poet_next(Poet* poet) {
 }
 
 char* Poet_output(Poet* poet) {
-  char c;
+  char c = 0;
   GString *s = NULL;
 
   assert(poet);
@@ -119,8 +119,7 @@ char* Poet_output(Poet* poet) {
 }
 
 static char next(Poet* poet) {
-  //?? What would be a reasonable default to initialize a char with?
-  char c;
+  char c = 0;
   int i = 0;
   int randNum = 0;
 

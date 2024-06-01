@@ -21,7 +21,7 @@ void test_wordlen_fail() {
 void test_next() {
   Poet *p = NULL;
   p = Poet_new("abcdabceabcfabc", 3);
-  char n;
+  char n = 0;
 
   /*
    * Advance three times to eat up the "abc".
