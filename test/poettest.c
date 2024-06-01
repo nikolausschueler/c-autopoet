@@ -37,10 +37,19 @@ void test_next() {
   g_assert(n == 'd' || n == 'e' || n == 'f' || n == '\0');
 }
 
+/*
+ * Test expectation about length of output.
+ */
+void test_length_of_output() {
+  Poet *p = Poet_new("abcdabceabcfabc", 3);
+  g_assert(strlen(Poet_output(p)) % 4 == 3);
+}
+
 int main(int argc, char **argv) {
     g_test_init(&argc, &argv, NULL);
     g_test_add_func("/set1/test wordlen", test_wordlen);
     g_test_add_func("/set1/test wordlen fail", test_wordlen_fail);
     g_test_add_func("/set1/test next", test_next);
+    g_test_add_func("/set1/test length of output", test_length_of_output);
     return g_test_run();
 }
