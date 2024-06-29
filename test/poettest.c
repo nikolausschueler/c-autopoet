@@ -2,6 +2,10 @@
 
 #include "poet.h"
 
+/*
+ * TODO: Call free() in the tests.
+ * But first check with valgrind how/if we leak memory.
+ */
 void test_wordlen() {
   Poet *p = NULL;
   p = Poet_new("Frobisher", 3);
