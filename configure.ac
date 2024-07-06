@@ -8,6 +8,9 @@ dnl between.
 CFLAGS+=" `pkg-config --cflags glib-2.0`"
 LDFLAGS+=" `pkg-config --libs glib-2.0`"
 
+dnl This is for Valgrind.
+CFLAGS+=" -g -O0"
+
 dnl Checks for programs.
 AC_PROG_MAKE_SET
 AC_PROG_CC

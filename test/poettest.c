@@ -10,6 +10,7 @@ void test_wordlen() {
   Poet *p = NULL;
   p = Poet_new("Frobisher", 3);
   g_assert(p != NULL);
+  Poet_free(&p);
 }
 
 void test_wordlen_fail() {
@@ -39,6 +40,8 @@ void test_next() {
    */
   n = Poet_next(p);
   g_assert(n == 'd' || n == 'e' || n == 'f' || n == '\0');
+
+  Poet_free(&p);
 }
 
 /*
@@ -46,7 +49,10 @@ void test_next() {
  */
 void test_length_of_output() {
   Poet *p = Poet_new("abcdabceabcfabc", 3);
-  g_assert(strlen(Poet_output(p)) % 4 == 3);
+  char *s = Poet_output(p);
+  g_assert(strlen(s) % 4 == 3);
+  free(s);
+  Poet_free(&p);
 }
 
 int main(int argc, char **argv) {

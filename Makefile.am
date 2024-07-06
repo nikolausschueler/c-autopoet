@@ -12,6 +12,11 @@ apidoc:
 docclean:
 	rm -fr apidoc
 
+# This may not be the most elegant way to call Valgrind, but for starters ...
+.PHONY: valgrind
+valgrind:
+	valgrind --leak-check=full --track-origins=yes test/.libs/poettest
+
 .PHONY: vagrant
 vagrant:
 	- vagrant destroy -f
