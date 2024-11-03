@@ -5,6 +5,8 @@
 /*
  * TODO: Call free() in the tests.
  * But first check with valgrind how/if we leak memory.
+ *
+ * TODO: More tests here.
  */
 void test_wordlen() {
   Poet *p = NULL;
